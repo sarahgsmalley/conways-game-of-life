@@ -85,35 +85,5 @@ namespace GameOfLifeTests
             // Assert
             Assert.False(result);
         }
-
-        [Theory]
-        [InlineData(CellState.Alive)]
-        [InlineData(CellState.Dead)]
-        public void Cell_State_Should_Remain_At_Or_Change_To_Alive(CellState cellState)
-        {
-            // Arrange
-            var target = new Cell(cellState);
-
-            // Act
-            target.SetCellState(CellState.Alive);
-
-            // Assert
-            Assert.Equal(CellState.Alive, target.GetCellState());
-        }
-        
-        [Theory]
-        [InlineData(CellState.Alive)]
-        [InlineData(CellState.Dead)]
-        public void Should_Change_Cell_State_To_Dead(CellState cellState)
-        {
-            // Arrange
-            var target = new Cell(cellState);
-
-            // Act
-            target.SetCellState(CellState.Dead);
-
-            // Assert
-            Assert.Equal(CellState.Dead, target.GetCellState());
-        }
     }
 }

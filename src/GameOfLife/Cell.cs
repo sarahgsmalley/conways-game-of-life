@@ -5,28 +5,18 @@ namespace GameOfLife
 {
     public class Cell
     {
-        private CellState _cellState;
+        public CellState CellState { get; private set; }
 
         public Cell(CellState cellState)
         {
-            SetCellState(cellState);
+            CellState = cellState;
         }
 
         public bool IsAliveNextGeneration(int numberOfLiveNeighbours)
         {
-            return _cellState == CellState.Alive 
+            return CellState == CellState.Alive 
             ? numberOfLiveNeighbours == 2 || numberOfLiveNeighbours == 3 
             : numberOfLiveNeighbours == 3;
-        }
-
-        public void SetCellState(CellState cellState)
-        {
-            _cellState = cellState;
-        }
-
-        public CellState GetCellState()
-        {
-            return _cellState;
         }
     }
 }
