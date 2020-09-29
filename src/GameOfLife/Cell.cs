@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace GameOfLife
 {
@@ -8,7 +9,7 @@ namespace GameOfLife
 
         public Cell(CellState cellState)
         {
-            _cellState = cellState;
+            SetCellState(cellState);
         }
 
         public bool IsAliveNextGeneration(int numberOfLiveNeighbours)
@@ -16,6 +17,16 @@ namespace GameOfLife
             return _cellState == CellState.Alive 
             ? numberOfLiveNeighbours == 2 || numberOfLiveNeighbours == 3 
             : numberOfLiveNeighbours == 3;
+        }
+
+        public void SetCellState(CellState cellState)
+        {
+            _cellState = cellState;
+        }
+
+        public CellState GetCellState()
+        {
+            return _cellState;
         }
     }
 }
