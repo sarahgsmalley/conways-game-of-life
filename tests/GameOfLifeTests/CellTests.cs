@@ -25,26 +25,35 @@ namespace GameOfLifeTests
 
         [Theory]
         [InlineData(0)]
-        public void Live_Cell_Should_Die_By_Underpopulation()
+        [InlineData(1)]
+        public void Live_Cell_Should_Die_By_Underpopulation(int numberOfLiveNeighbours)
         {
             // Arrange
             var target = new Cell(CellState.Alive);
 
             // Act
+            var result = target.IsAliveNextGeneration(numberOfLiveNeighbours);
 
             // Assert
-            
+            Assert.False(result);
         }
 
-        [Fact]
-        public void Live_Cell_Should_Die_By_Overpopulation()
+        [Theory]
+        [InlineData(4)]
+        [InlineData(5)]
+        [InlineData(6)]
+        [InlineData(7)]
+        [InlineData(8)]
+        public void Live_Cell_Should_Die_By_Overpopulation(int numberOfLiveNeighbours)
         {
             // Arrange
             var target = new Cell(CellState.Alive);
 
             // Act
+            var result = target.IsAliveNextGeneration(numberOfLiveNeighbours);
 
             // Assert
+            Assert.False(result);
         }
 
         [Fact]
@@ -63,6 +72,8 @@ namespace GameOfLifeTests
         [Theory]
         [InlineData(0)]
         [InlineData(2)]
+        [InlineData(4)]
+        [InlineData(6)]
         public void Dead_Cell_Should_Remain_Dead(int numberOfLiveNeighbours)
         {
             // Arrange
