@@ -15,12 +15,7 @@ namespace GameOfLife
         public Input Parse()
         {
             var json = File.ReadAllText(_filePath);
-            // read in json file to string
-            var result = JsonConvert.DeserializeObject<Input>(json);
-            // for output - convert string to json
-            var resultString = JsonConvert.SerializeObject(result);
-            Console.WriteLine(result);
-            return result;
+            return JsonConvert.DeserializeObject<Input>(json);
         }
     }
 }
