@@ -13,16 +13,25 @@ namespace GameOfLife
 
         public void Validate()
         {
-            if(_input.InitialCellStates.Count != _input.RowCount)
+            ValidateRowCount();
+            ValidateColumnCount();
+        }
+
+        private void ValidateRowCount()
+        {
+            if (_input.InitialCellStates.Count != _input.RowCount)
             {
-                throw new InvalidGridDimensionsException("Row");
+                throw new InvalidInputException();
             }
-            
-            foreach(var row in _input.InitialCellStates)
+        }
+
+        private void ValidateColumnCount()
+        {
+            foreach (var row in _input.InitialCellStates)
             {
-                if(row.Count != _input.ColumnCount)
+                if (row.Count != _input.ColumnCount)
                 {
-                    throw new InvalidGridDimensionsException("Column");
+                    throw new InvalidInputException();
                 }
             }
         }
