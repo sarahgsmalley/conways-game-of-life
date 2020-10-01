@@ -18,5 +18,11 @@ namespace GameOfLife
             ? numberOfLiveNeighbours == 2 || numberOfLiveNeighbours == 3 
             : numberOfLiveNeighbours == 3;
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Cell cell &&
+                   CellState == cell.CellState;
+        }
     }
 }
