@@ -1,5 +1,4 @@
 ﻿using System;
-using GameOfLife;
 
 namespace ConsoleApp
 {
