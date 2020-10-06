@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace GameOfLife
 {
-    public class Cell
+    public class Cell : IEquatable<Cell>
     {
         public CellState CellState { get; private set; }
 
@@ -19,10 +19,9 @@ namespace GameOfLife
             : numberOfLiveNeighbours == 3;
         }
 
-        public override bool Equals(object obj)
+        public bool Equals(Cell cell)
         {
-            return obj is Cell cell &&
-                   CellState == cell.CellState;
+            return CellState == cell.CellState;
         }
     }
 }

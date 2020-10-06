@@ -3,9 +3,8 @@ using System.Collections.Generic;
 
 namespace GameOfLife
 {
-    public class Grid
+    public class Grid : IEquatable<Grid>
     {
-
         public int RowCount { get; private set; }
         public int ColumnCount { get; private set; }
         public List<List<Cell>> Cells { get; private set; }
@@ -38,9 +37,9 @@ namespace GameOfLife
             return result;
         }
 
-        public override bool Equals(object obj)
+        public bool Equals(Grid grid)
         {
-            if(obj is Grid grid && RowCount == grid.RowCount && ColumnCount == grid.ColumnCount)
+            if (RowCount == grid.RowCount && ColumnCount == grid.ColumnCount)
             {
                 for (int rowIndex = 0; rowIndex < RowCount; rowIndex++)
                 {
@@ -48,7 +47,7 @@ namespace GameOfLife
                     {
                         var currentCell = Cells[rowIndex][colIndex];
                         var otherCell = grid.Cells[rowIndex][colIndex];
-                        if(!otherCell.Equals(currentCell))
+                        if (!otherCell.Equals(currentCell))
                         {
                             return false;
                         }
