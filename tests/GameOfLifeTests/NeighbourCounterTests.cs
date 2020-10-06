@@ -17,10 +17,10 @@ namespace GameOfLifeTests
                 new List<Cell> {new Cell(CellState.Dead), new Cell(CellState.Dead), new Cell(CellState.Dead)}
             };
             var grid = new Grid(3, 3, cells);
-            var target = new NeighbourCounter();
+            var target = new NeighbourCounter(grid.Cells);
 
             // Act
-            var result = target.GetLiveNeighbourCount(grid.Cells[1][1]);
+            var result = target.GetLiveNeighbourCount(1, 1);
 
             // Assert
             Assert.Equal(2, result);
