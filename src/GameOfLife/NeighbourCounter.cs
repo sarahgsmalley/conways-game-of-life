@@ -16,7 +16,7 @@ namespace GameOfLife
             _cells = cells;
             _maxRowCount = cells.Count();
             _maxColumnCount = cells[0].Count();
-            _offsets = LocationOffsetProvider.ProvideCentralCellOffsets();
+            _offsets = LocationOffsetProvider.GetLocationOffsets();
         }
 
         public int GetLiveNeighbourCount(int cellRowIndex, int cellColIndex)

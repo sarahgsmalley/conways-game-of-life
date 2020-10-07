@@ -41,5 +41,15 @@ namespace GameOfLifeTests
                             };
             Assert.Equal<List<List<CellState>>>(expected, result.InitialCellStates);
         }
+
+        [Fact]
+        public void Should_Handle_Parsing_Errors_On_Initial_CellState()
+        {
+            // Arrange
+            var target = new InputReader("TestFiles/InvalidCellStates.json");
+
+            // Act & Assert
+            var exception = Assert.Throws<InvalidInputException>(() => target.Parse());
+        }
     }
 }

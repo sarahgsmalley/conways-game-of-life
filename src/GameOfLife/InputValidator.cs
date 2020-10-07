@@ -21,7 +21,7 @@ namespace GameOfLife
         {
             if (_input.InitialCellStates.Count != _input.RowCount)
             {
-                throw new InvalidInputException();
+                throw new InvalidInputException("Error: RowCount does not match the number of Rows in InitialCellStates.");
             }
         }
 
@@ -31,7 +31,7 @@ namespace GameOfLife
             {
                 if (row.Count != _input.ColumnCount)
                 {
-                    throw new InvalidInputException();
+                    throw new InvalidInputException("Error: ColumnCount does not match the number of Columns in InitialCellStates.");
                 }
             }
         }

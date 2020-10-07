@@ -4,7 +4,7 @@ namespace GameOfLife
 {
     public class LocationOffsetProvider
     {
-        public static List<LocationOffset> ProvideCentralCellOffsets()
+        public static List<LocationOffset> GetLocationOffsets()
         {
             return new List<LocationOffset>()
             {

@@ -5,23 +5,28 @@ namespace GameOfLifeTests
 {
     public class InputValidatorTests
     {
-        [Theory]
-        [InlineData("TestFiles/InvalidRowCount.json")]
-        [InlineData("TestFiles/InvalidColumnCount.json")]
-        [InlineData("TestFiles/InvalidCellStates.json")]
-        public void Should_Throw_When_Input_For_RowColumn_ColumnCount_Or_InitialCellStates_Is_Invalid(string inputPath)
+        [Fact]
+        public void Should_Throw_When_Number_Of_Rows_Does_Not_Match_Row_Count()
         {
             // Arrange
-            var input = new InputReader(inputPath).Parse();
+            var input = new InputReader("TestFiles/InvalidRowCount.json").Parse();
             var target = new InputValidator(input);
 
             // Act & Assert
             var exception = Assert.Throws<InvalidInputException>(() => target.Validate());
-            var expectedMessage =
-                        "Error: RowCount or ColumnCount does not match InitialCellStates." +
-                        "This could be because your RowCount or ColumnCount is incorrect," +
-                        "or you may have invalid characters in InitialCellStates.";
-            Assert.Equal(expectedMessage, exception.Message);
+            Assert.Equal("Error: RowCount does not match the number of Rows in InitialCellStates.", exception.Message);
+        }
+
+        [Fact]
+        public void Should_Throw_When_Number_Of_Columns_Does_Not_Match_Row_Count()
+        {
+            // Arrange
+            var input = new InputReader("TestFiles/InvalidColumnCount.json").Parse();
+            var target = new InputValidator(input);
+
+            // Act & Assert
+            var exception = Assert.Throws<InvalidInputException>(() => target.Validate());
+            Assert.Equal("Error: ColumnCount does not match the number of Columns in InitialCellStates.", exception.Message);
         }
     }
 }

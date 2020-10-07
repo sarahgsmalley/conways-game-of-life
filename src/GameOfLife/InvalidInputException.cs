@@ -1,16 +1,29 @@
 using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
+using System.Text;
 
 namespace GameOfLife
 {
     public class InvalidInputException : Exception
     {
-        const string defaultMessage =
-                    "Error: RowCount or ColumnCount does not match InitialCellStates." +
-                    "This could be because your RowCount or ColumnCount is incorrect," +
-                    "or you may have invalid characters in InitialCellStates.";
-        public InvalidInputException(string message = defaultMessage) : base(message)
+        public InvalidInputException(string message) : base(message)
         {
+        }
+
+        public InvalidInputException(List<string> errors) : base(FormatErrorList(errors))
+        {
+        }
+
+        private static string FormatErrorList(List<string> errors)
+        {
+            var result = new StringBuilder();
+            result.Append("Error: Your input file is invalid for the following reason(s):");
+            foreach(string error in errors) {
+                result.Append(error);
+                result.AppendLine();
+            }
+            return result.ToString();
         }
     }
 }
