@@ -1,13 +1,10 @@
 using System;
+using GameOfLife;
 
-namespace GameOfLife
+namespace ConsoleApp
 {
     public class GameController
     {
-        public GameController()
-        {
-        }
-
         public Input GetInput(string filePath)
         {
             var inputReader = new InputReader(filePath);

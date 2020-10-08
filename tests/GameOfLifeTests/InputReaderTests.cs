@@ -50,6 +50,7 @@ namespace GameOfLifeTests
 
             // Act & Assert
             var exception = Assert.Throws<InvalidInputException>(() => target.Parse());
+            Assert.Contains("Error: Your input file is invalid for the following reason(s):", exception.Message);
         }
     }
 }
