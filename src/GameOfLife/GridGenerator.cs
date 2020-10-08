@@ -5,6 +5,8 @@ namespace GameOfLife
 {
     public class GridGenerator
     {
+        //TODO Create the initial grid from the file
+        
         public Grid CreateNextGeneration(Grid previousGrid)
         {
             var neighbourCounter = new NeighbourCounter(previousGrid.Cells);

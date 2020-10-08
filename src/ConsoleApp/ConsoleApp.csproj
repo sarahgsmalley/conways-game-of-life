@@ -9,4 +9,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Update="InputFiles/*.*"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></None>
+  </ItemGroup>
+
 </Project>
