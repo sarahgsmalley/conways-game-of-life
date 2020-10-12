@@ -7,7 +7,7 @@ namespace GameOfLifeTests
     public class NeighbourCounterTests
     {
         [Fact]
-        public void Should_Get_Live_Neighbour_Count_For_Central_Cell()
+        public void Should_Get_Live_Neighbour_Count_For_Central_Location()
         {
             // Arrange
             var cells = new List<List<Cell>> 
@@ -48,6 +48,5 @@ namespace GameOfLifeTests
             // Assert
             Assert.Equal(expectedLiveCount, result);
         }
-
     }
 }

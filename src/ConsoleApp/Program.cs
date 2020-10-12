@@ -10,13 +10,14 @@ namespace ConsoleApp
         {
             Console.CancelKeyPress += HandleCancelKeyPress;
 
-            // validate args[0] has the file
-            // if null/empty use default
-            
+            var filePath = "";
+            if (args == null || args.Length == 0) filePath = "InputFiles/SmallDefaultState.json";
+            else filePath = args[0];
+
             var consolePresenter = new ConsolePresenter();
             var gridGenerator = new GridGenerator();
-            var grid = new Grid(GetInput("InputFiles/InitialStateTemplate.json"));
-            while(true)
+            var grid = new Grid(GetInput(filePath));
+            while (true)
             {
                 consolePresenter.PrintGrid(grid);
                 Thread.Sleep(1000);
