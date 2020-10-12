@@ -9,14 +9,12 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
             Console.CancelKeyPress += HandleCancelKeyPress;
-
-            var filePath = "";
-            if (args == null || args.Length == 0) filePath = "InputFiles/SmallDefaultState.json";
-            else filePath = args[0];
-
+            
             var consolePresenter = new ConsolePresenter();
             var gridGenerator = new GridGenerator();
-            var grid = gridGenerator.CreateFirstGeneration(filePath);
+            var initialStateFilePath = GetFilePath(args);
+            
+            var grid = gridGenerator.CreateFirstGeneration(initialStateFilePath);
             while (true)
             {
                 consolePresenter.PrintGrid(grid);
@@ -30,6 +28,12 @@ namespace ConsoleApp
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Stopped");
             Console.ResetColor();
+        }
+
+        private static string GetFilePath(string[] args)
+        {
+            if (args == null || args.Length == 0) return "InputFiles/SmallDefaultState.json";
+            return args[0];
         }
     }
 }
