@@ -1,0 +1,21 @@
+{
+    "RowCount": 3,
+    "ColumnCount": 3,
+    "InitialCellStates": [
+        [
+            "Dead",
+            "Alive",
+            "Dead"
+        ],
+        [
+            "Alive",
+            "Dead",
+            "Dead"
+        ],
+        [
+            "Alive",
+            "Alive",
+            "Dead"
+        ]
+    ]
+}

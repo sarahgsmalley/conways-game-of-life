@@ -16,7 +16,7 @@ namespace ConsoleApp
 
             var consolePresenter = new ConsolePresenter();
             var gridGenerator = new GridGenerator();
-            var grid = new Grid(GetInput(filePath));
+            var grid = gridGenerator.CreateFirstGeneration(filePath);
             while (true)
             {
                 consolePresenter.PrintGrid(grid);
@@ -30,15 +30,6 @@ namespace ConsoleApp
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Stopped");
             Console.ResetColor();
-        }
-
-        public static Input GetInput(string filePath)
-        {
-            var inputReader = new InputReader(filePath);
-            var initialGridStateInput = inputReader.Parse();
-            var inputValidator = new InputValidator(initialGridStateInput);
-            inputValidator.Validate();
-            return initialGridStateInput;
         }
     }
 }

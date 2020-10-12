@@ -5,7 +5,14 @@ namespace GameOfLife
 {
     public class GridGenerator
     {
-        //TODO Create the initial grid from the file
+        public Grid CreateFirstGeneration(string initialStateFilePath)
+        {
+            var inputReader = new InputReader(initialStateFilePath);
+            var initialGridStateInput = inputReader.Parse();
+            var inputValidator = new InputValidator(initialGridStateInput);
+            inputValidator.Validate();
+            return new Grid(initialGridStateInput);
+        }
         
         public Grid CreateNextGeneration(Grid previousGrid)
         {
@@ -24,5 +31,6 @@ namespace GameOfLife
             }
             return new Grid(previousGrid.RowCount, previousGrid.ColumnCount, newCells);
         }
+
     }
 }
