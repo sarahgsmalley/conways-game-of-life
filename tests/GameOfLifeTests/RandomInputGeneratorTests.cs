@@ -6,16 +6,16 @@ namespace GameOfLifeTests
 {
     public class RandomInputGeneratorTests
     {
-        [Fact]
-        public void Should_Generate_Random_Input()
-        {
-            // Arrange
-            var target = new RandomInputGenerator();
+        // [Fact]
+        // public void Should_Generate_Random_Input()
+        // {
+        //     // Arrange
+        //     var target = new RandomInputGenerator();
 
-            // Act
-            var result = target.Generate();
+        //     // Act
+        //     var result = target.Generate();
 
-            // Assert
-        }   
+        //     // Assert
+        // }   
     }
 }

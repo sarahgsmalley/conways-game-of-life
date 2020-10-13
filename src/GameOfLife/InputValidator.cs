@@ -2,34 +2,27 @@ using System;
 
 namespace GameOfLife
 {
-    public class InputValidator
+    public class InputValidator : IInputValidator
     {
-        private Input _input;
-
-        public InputValidator(Input input)
+        public void Validate(Input input)
         {
-            _input = input;
+            ValidateRowCount(input);
+            ValidateColumnCount(input);
         }
 
-        public void Validate()
+        private void ValidateRowCount(Input input)
         {
-            ValidateRowCount();
-            ValidateColumnCount();
-        }
-
-        private void ValidateRowCount()
-        {
-            if (_input.InitialCellStates.Count != _input.RowCount)
+            if (input.InitialCellStates.Count != input.RowCount)
             {
                 throw new InvalidInputException("Error: RowCount does not match the number of Rows in InitialCellStates.");
             }
         }
 
-        private void ValidateColumnCount()
+        private void ValidateColumnCount(Input input)
         {
-            foreach (var row in _input.InitialCellStates)
+            foreach (var row in input.InitialCellStates)
             {
-                if (row.Count != _input.ColumnCount)
+                if (row.Count != input.ColumnCount)
                 {
                     throw new InvalidInputException("Error: ColumnCount does not match the number of Columns in InitialCellStates.");
                 }

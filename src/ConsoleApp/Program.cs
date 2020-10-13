@@ -11,7 +11,7 @@ namespace ConsoleApp
             Console.CancelKeyPress += HandleCancelKeyPress;
             
             var consolePresenter = new ConsolePresenter();
-            var gridGenerator = new GridGenerator();
+            var gridGenerator = new GridGenerator(new InputReader(), new InputValidator());
             var initialStateFilePath = GetFilePath(args);
             
             var grid = gridGenerator.CreateFirstGeneration(initialStateFilePath);
