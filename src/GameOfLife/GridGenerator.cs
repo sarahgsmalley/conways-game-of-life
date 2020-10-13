@@ -5,6 +5,10 @@ namespace GameOfLife
 {
     public class GridGenerator
     {
+        private IInputReader _inputReader;
+        private IInputValidator _inputValidator;
+        private INeighbourCounter _neighbourCounter;
+        
         public Grid CreateFirstGeneration(string initialStateFilePath)
         {
             var inputReader = new InputReader(initialStateFilePath);
