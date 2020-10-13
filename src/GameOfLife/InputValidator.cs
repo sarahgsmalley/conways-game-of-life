@@ -2,7 +2,7 @@ using System;
 
 namespace GameOfLife
 {
-    public class InputValidator
+    public class InputValidator : IInputValidator
     {
         private Input _input;
 

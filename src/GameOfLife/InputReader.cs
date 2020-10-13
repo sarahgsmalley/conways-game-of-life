@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace GameOfLife
 {
-    public class InputReader
+    public class InputReader : IInputReader
     {
         private readonly string _filePath;
         private List<string> _errors;
