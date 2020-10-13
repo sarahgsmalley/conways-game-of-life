@@ -11,7 +11,7 @@ namespace GameOfLifeTests
         public void Should_Create_Valid_Grid()
         {
             // Arrange
-            var gridInput = new InputReader("TestFiles/WordCellInput.json").Parse();
+            var gridInput = new InputReader().Parse("TestFiles/WordCellInput.json");
 
             // Act
             var grid = new Grid(gridInput);

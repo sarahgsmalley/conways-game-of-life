@@ -2,6 +2,6 @@ namespace GameOfLife
 {
     public interface IInputValidator
     {
-        void Validate();
+        void Validate(Input input);
     }
 }

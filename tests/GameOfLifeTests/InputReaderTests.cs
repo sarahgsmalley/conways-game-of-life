@@ -10,10 +10,10 @@ namespace GameOfLifeTests
         public void Can_Read_Dimension_Input_As_Expected()
         {
             // Arrange
-            var target = new InputReader("TestFiles/WordCellInput.json");
+            var target = new InputReader();
 
             // Act
-            var result = target.Parse();
+            var result = target.Parse("TestFiles/WordCellInput.json");
 
             // Assert
             Assert.Equal(3, result.RowCount);
@@ -27,10 +27,10 @@ namespace GameOfLifeTests
         public void Should_Read_Initial_Cell_States_Input_As_Expected_Using_Both_Word_And_Number_Representations(string path)
         {
             // Arrange
-            var target = new InputReader(path);
+            var target = new InputReader();
 
             // Act
-            var result = target.Parse();
+            var result = target.Parse(path);
 
             // Assert
             var expected = new List<List<CellState>>
@@ -46,10 +46,10 @@ namespace GameOfLifeTests
         public void Should_Handle_Parsing_Errors_On_Initial_CellState()
         {
             // Arrange
-            var target = new InputReader("TestFiles/InvalidCellStates.json");
+            var target = new InputReader();
 
             // Act & Assert
-            var exception = Assert.Throws<InvalidInputException>(() => target.Parse());
+            var exception = Assert.Throws<InvalidInputException>(() => target.Parse("TestFiles/InvalidCellStates.json"));
             Assert.Contains("Error: Your input file is invalid for the following reason(s):", exception.Message);
         }
     }

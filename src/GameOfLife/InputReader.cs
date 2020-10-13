@@ -6,18 +6,16 @@ namespace GameOfLife
 {
     public class InputReader : IInputReader
     {
-        private readonly string _filePath;
         private List<string> _errors;
 
-        public InputReader(string filePath)
+        public InputReader()
         {
-            _filePath = filePath;
             _errors = new List<string>();
         }
 
-        public Input Parse()
+        public Input Parse(string filePath)
         {
-            var json = File.ReadAllText(_filePath);
+            var json = File.ReadAllText(filePath);
             var input = JsonConvert.DeserializeObject<Input>(json, new JsonSerializerSettings { Error = HandleParsingErrors });
             if (_errors.Count > 0)
             {
