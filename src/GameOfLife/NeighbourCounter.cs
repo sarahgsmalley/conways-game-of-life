@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace GameOfLife
 {
-    public class NeighbourCounter : INeighbourCounter
+    public class NeighbourCounter
     {
         private List<List<Cell>> _cells;
         private int _maxRowCount;

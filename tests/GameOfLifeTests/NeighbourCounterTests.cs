@@ -16,8 +16,7 @@ namespace GameOfLifeTests
                 new List<Cell> {new Cell(CellState.Alive), new Cell(CellState.Alive), new Cell(CellState.Alive)},
                 new List<Cell> {new Cell(CellState.Dead), new Cell(CellState.Dead), new Cell(CellState.Dead)}
             };
-            var grid = new Grid(3, 3, cells);
-            var target = new NeighbourCounter(grid.Cells);
+            var target = new NeighbourCounter(cells);
 
             // Act
             var result = target.GetLiveNeighbourCount(1, 1);
@@ -39,8 +38,7 @@ namespace GameOfLifeTests
                 new List<Cell> {new Cell(CellState.Dead), new Cell(CellState.Dead), new Cell(CellState.Dead)},
                 new List<Cell> {new Cell(CellState.Dead), new Cell(CellState.Dead), new Cell(CellState.Dead)}
             };
-            var grid = new Grid(3, 3, cells);
-            var target = new NeighbourCounter(grid.Cells);
+            var target = new NeighbourCounter(cells);
 
             // Act
             var result = target.GetLiveNeighbourCount(rowIndex, colIndex);

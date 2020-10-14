@@ -19,7 +19,7 @@ namespace GameOfLifeTests
             var result = target.CreateFirstGeneration("TestFiles/ValidInitialState.json");
 
             // Assert
-            var expectedGrid = new Grid(3, 3, new List<List<Cell>> 
+            var expectedGrid = new Grid(3, 3, new List<List<Cell>>
             {
                 new List<Cell> {new Cell(CellState.Dead), new Cell(CellState.Alive), new Cell(CellState.Dead)},
                 new List<Cell> {new Cell(CellState.Alive), new Cell(CellState.Dead), new Cell(CellState.Dead)},
@@ -46,7 +46,7 @@ namespace GameOfLifeTests
         {
             // Arrange
             var reader = new Mock<IInputReader>();
-            Input value = new Input{ RowCount = 3, ColumnCount = 3, InitialCellStates = new List<List<CellState>>()};
+            Input value = new Input { RowCount = 3, ColumnCount = 3, InitialCellStates = new List<List<CellState>>() };
             reader.Setup(o => o.Parse(It.IsAny<string>())).Returns(value);
             var validator = new Mock<IInputValidator>();
             validator.Setup(o => o.Validate(It.IsAny<Input>())).Throws<InvalidInputException>();
@@ -63,7 +63,7 @@ namespace GameOfLifeTests
         {
             // Arrange
             var target = new GridGenerator(new InputReader(), new InputValidator());
-            var cells = new List<List<Cell>> 
+            var cells = new List<List<Cell>>
             {
                 new List<Cell> {new Cell(CellState.Dead), new Cell(CellState.Dead), new Cell(CellState.Dead)},
                 new List<Cell> {new Cell(CellState.Alive), new Cell(CellState.Alive), new Cell(CellState.Alive)},
@@ -75,14 +75,14 @@ namespace GameOfLifeTests
             var result = target.CreateNextGeneration(previousGrid);
 
             // Assert
-            var expectedGrid = new Grid(3, 3, new List<List<Cell>> 
+            var expectedGrid = new Grid(3, 3, new List<List<Cell>>
             {
                 new List<Cell> {new Cell(CellState.Alive), new Cell(CellState.Alive), new Cell(CellState.Alive)},
                 new List<Cell> {new Cell(CellState.Alive), new Cell(CellState.Alive), new Cell(CellState.Alive)},
                 new List<Cell> {new Cell(CellState.Alive), new Cell(CellState.Alive), new Cell(CellState.Alive)}
             });
             Assert.Equal(expectedGrid, result);
-        
+
         }
     }
 }
