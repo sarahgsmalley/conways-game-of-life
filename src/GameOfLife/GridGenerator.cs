@@ -7,7 +7,6 @@ namespace GameOfLife
     {
         private IInputReader _inputReader;
         private IInputValidator _inputValidator;
-        private INeighbourCounter _neighbourCounter;
 
         public GridGenerator(IInputReader reader, IInputValidator validator)
         {
