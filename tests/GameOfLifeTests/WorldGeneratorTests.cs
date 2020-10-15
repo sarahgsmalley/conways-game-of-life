@@ -5,7 +5,7 @@ using Xunit;
 
 namespace GameOfLifeTests
 {
-    public class GridGeneratorTests
+    public class WorldGeneratorTests
     {
         [Fact]
         public void Should_Create_First_Generation_From_File()
@@ -13,19 +13,19 @@ namespace GameOfLifeTests
             // Arrange
             var reader = new InputReader();
             var validator = new InputValidator();
-            var target = new GridGenerator(reader, validator);
+            var target = new WorldGenerator(reader, validator);
 
             // Act
             var result = target.CreateFirstGeneration("TestFiles/ValidInitialState.json");
 
             // Assert
-            var expectedGrid = new Grid(3, 3, new List<List<Cell>>
+            var expectedWorld = new World(3, 3, new List<List<Cell>>
             {
                 new List<Cell> {new Cell(CellState.Dead), new Cell(CellState.Alive), new Cell(CellState.Dead)},
                 new List<Cell> {new Cell(CellState.Alive), new Cell(CellState.Dead), new Cell(CellState.Dead)},
                 new List<Cell> {new Cell(CellState.Alive), new Cell(CellState.Alive), new Cell(CellState.Dead)}
             });
-            Assert.Equal(expectedGrid, result);
+            Assert.Equal(expectedWorld, result);
         }
 
         [Fact]
@@ -34,7 +34,7 @@ namespace GameOfLifeTests
             // Arrange
             var reader = new InputReader();
             var validator = new InputValidator();
-            var target = new GridGenerator(reader, validator);
+            var target = new WorldGenerator(reader, validator);
 
             // Act
             // Assert
@@ -50,7 +50,7 @@ namespace GameOfLifeTests
             reader.Setup(o => o.Parse(It.IsAny<string>())).Returns(value);
             var validator = new Mock<IInputValidator>();
             validator.Setup(o => o.Validate(It.IsAny<Input>())).Throws<InvalidInputException>();
-            var target = new GridGenerator(reader.Object, validator.Object);
+            var target = new WorldGenerator(reader.Object, validator.Object);
 
             // Act
             // Assert
@@ -62,26 +62,26 @@ namespace GameOfLifeTests
         public void Should_Create_Next_Generation()
         {
             // Arrange
-            var target = new GridGenerator(new InputReader(), new InputValidator());
+            var target = new WorldGenerator(new InputReader(), new InputValidator());
             var cells = new List<List<Cell>>
             {
                 new List<Cell> {new Cell(CellState.Dead), new Cell(CellState.Dead), new Cell(CellState.Dead)},
                 new List<Cell> {new Cell(CellState.Alive), new Cell(CellState.Alive), new Cell(CellState.Alive)},
                 new List<Cell> {new Cell(CellState.Dead), new Cell(CellState.Dead), new Cell(CellState.Dead)}
             };
-            var previousGrid = new Grid(3, 3, cells);
+            var previousWorld = new World(3, 3, cells);
 
             // Act
-            var result = target.CreateNextGeneration(previousGrid);
+            var result = target.CreateNextGeneration(previousWorld);
 
             // Assert
-            var expectedGrid = new Grid(3, 3, new List<List<Cell>>
+            var expectedWorld = new World(3, 3, new List<List<Cell>>
             {
                 new List<Cell> {new Cell(CellState.Alive), new Cell(CellState.Alive), new Cell(CellState.Alive)},
                 new List<Cell> {new Cell(CellState.Alive), new Cell(CellState.Alive), new Cell(CellState.Alive)},
                 new List<Cell> {new Cell(CellState.Alive), new Cell(CellState.Alive), new Cell(CellState.Alive)}
             });
-            Assert.Equal(expectedGrid, result);
+            Assert.Equal(expectedWorld, result);
 
         }
     }

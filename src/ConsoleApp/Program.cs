@@ -11,15 +11,15 @@ namespace ConsoleApp
             Console.CancelKeyPress += HandleCancelKeyPress;
             
             var consolePresenter = new ConsolePresenter();
-            var gridGenerator = new GridGenerator(new InputReader(), new InputValidator());
+            var worldGenerator = new WorldGenerator(new InputReader(), new InputValidator());
             var initialStateFilePath = GetFilePath(args);
             
-            var grid = gridGenerator.CreateFirstGeneration(initialStateFilePath);
+            var world = worldGenerator.CreateFirstGeneration(initialStateFilePath);
             while (true)
             {
-                consolePresenter.PrintGrid(grid);
+                consolePresenter.PrintWorld(world);
                 Thread.Sleep(1000);
-                grid = gridGenerator.CreateNextGeneration(grid);
+                world = worldGenerator.CreateNextGeneration(world);
             }
         }
 

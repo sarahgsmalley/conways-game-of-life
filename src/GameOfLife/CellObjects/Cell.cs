@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace GameOfLife
 {
-    public class Cell : IEquatable<Cell>
+    public class Cell : ICell, IEquatable<Cell>
     {
         public CellState CellState { get; private set; }
 
