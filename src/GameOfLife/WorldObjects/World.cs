@@ -3,22 +3,25 @@ using System.Collections.Generic;
 
 namespace GameOfLife
 {
-    public class World : IEquatable<World>
+    public class World : IWorld, IEquatable<World>
     {
-        public int RowCount { get; private set; }
-        public int ColumnCount { get; private set; }
+        public Dimension Dimension { get; private set; }
         public List<List<Cell>> Cells { get; private set; }
         public World(Input input)
         {
-            RowCount = input.RowCount;
-            ColumnCount = input.ColumnCount;
+            Dimension = new Dimension(input.RowCount, input.ColumnCount);
             Cells = GenerateCellsFromCellState(input.InitialCellStates);
         }
 
         public World(int rowCount, int columnCount, List<List<Cell>> cells)
         {
-            RowCount = rowCount;
-            ColumnCount = columnCount;
+            Dimension = new Dimension(rowCount, columnCount);
+            Cells = cells;
+        }
+
+        public World(Dimension existingDimension, List<List<Cell>> cells)
+        {
+            Dimension = existingDimension;
             Cells = cells;
         }
 
@@ -39,11 +42,11 @@ namespace GameOfLife
 
         public bool Equals(World world)
         {
-            if (RowCount == world.RowCount && ColumnCount == world.ColumnCount)
+            if (world.Dimension.Equals(Dimension))
             {
-                for (int rowIndex = 0; rowIndex < RowCount; rowIndex++)
+                for (int rowIndex = 0; rowIndex < Dimension.RowCount; rowIndex++)
                 {
-                    for (int colIndex = 0; colIndex < ColumnCount; colIndex++)
+                    for (int colIndex = 0; colIndex < Dimension.ColumnCount; colIndex++)
                     {
                         var currentCell = Cells[rowIndex][colIndex];
                         var otherCell = world.Cells[rowIndex][colIndex];
