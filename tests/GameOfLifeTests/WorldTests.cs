@@ -5,16 +5,16 @@ using Xunit;
 
 namespace GameOfLifeTests
 {
-    public class GridTests
+    public class WorldTests
     {
         [Fact]
-        public void Should_Create_Valid_Grid()
+        public void Should_Create_Valid_World()
         {
             // Arrange
-            var gridInput = new InputReader().Parse("TestFiles/WordCellInput.json");
+            var worldInput = new InputReader().Parse("TestFiles/WordCellInput.json");
 
             // Act
-            var grid = new Grid(gridInput);
+            var world = new World(worldInput);
 
             // Assert
             var expectedCells = new List<List<Cell>> 
@@ -23,9 +23,9 @@ namespace GameOfLifeTests
                 new List<Cell> {new Cell(CellState.Alive), new Cell(CellState.Alive), new Cell(CellState.Alive)},
                 new List<Cell> {new Cell(CellState.Dead), new Cell(CellState.Dead), new Cell(CellState.Dead)}
             };
-            var expectedGrid = new Grid(3, 3, expectedCells);
+            var expectedWorld = new World(3, 3, expectedCells);
 
-            Assert.Equal(expectedGrid, grid);
+            Assert.Equal(expectedWorld, world);
         }
     }
 }

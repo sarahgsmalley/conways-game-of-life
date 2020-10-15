@@ -3,19 +3,19 @@ using System.Collections.Generic;
 
 namespace GameOfLife
 {
-    public class Grid : IEquatable<Grid>
+    public class World : IEquatable<World>
     {
         public int RowCount { get; private set; }
         public int ColumnCount { get; private set; }
         public List<List<Cell>> Cells { get; private set; }
-        public Grid(Input input)
+        public World(Input input)
         {
             RowCount = input.RowCount;
             ColumnCount = input.ColumnCount;
             Cells = GenerateCellsFromCellState(input.InitialCellStates);
         }
 
-        public Grid(int rowCount, int columnCount, List<List<Cell>> cells)
+        public World(int rowCount, int columnCount, List<List<Cell>> cells)
         {
             RowCount = rowCount;
             ColumnCount = columnCount;
@@ -37,16 +37,16 @@ namespace GameOfLife
             return result;
         }
 
-        public bool Equals(Grid grid)
+        public bool Equals(World world)
         {
-            if (RowCount == grid.RowCount && ColumnCount == grid.ColumnCount)
+            if (RowCount == world.RowCount && ColumnCount == world.ColumnCount)
             {
                 for (int rowIndex = 0; rowIndex < RowCount; rowIndex++)
                 {
                     for (int colIndex = 0; colIndex < ColumnCount; colIndex++)
                     {
                         var currentCell = Cells[rowIndex][colIndex];
-                        var otherCell = grid.Cells[rowIndex][colIndex];
+                        var otherCell = world.Cells[rowIndex][colIndex];
                         if (!otherCell.Equals(currentCell))
                         {
                             return false;
