@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace GameOfLife
 {
-    public class World : IWorld, IEquatable<World>
+    public class World : IEquatable<World>
     {
         public Dimension Dimension { get; private set; }
         public List<List<Cell>> Cells { get; private set; }
