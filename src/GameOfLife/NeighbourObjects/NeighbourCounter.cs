@@ -14,8 +14,8 @@ namespace GameOfLife
         public NeighbourCounter(List<List<Cell>> cells)
         {
             _cells = cells;
-            _maxRowCount = cells.Count();
-            _maxColumnCount = cells[0].Count();
+            _maxRowCount = cells.Count;
+            _maxColumnCount = cells[0].Count;
             _offsets = LocationOffsetProvider.GetLocationOffsets();
         }
 

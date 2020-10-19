@@ -6,7 +6,7 @@ namespace GameOfLife
     {
         public static List<LocationOffset> GetLocationOffsets()
         {
-            return new List<LocationOffset>()
+            return new List<LocationOffset>
             {
                 new LocationOffset { RowOffset = -1, ColumnOffset = -1 },
                 new LocationOffset { RowOffset = -1, ColumnOffset = 0 },

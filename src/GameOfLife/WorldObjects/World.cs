@@ -7,6 +7,11 @@ namespace GameOfLife
     {
         public Dimension Dimension { get; private set; }
         public List<List<Cell>> Cells { get; private set; }
+        
+        public World()
+        {
+        }
+
         public World(Input input)
         {
             Dimension = new Dimension(input.RowCount, input.ColumnCount);

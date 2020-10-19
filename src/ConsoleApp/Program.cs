@@ -1,5 +1,6 @@
-﻿using System.Threading;
+﻿using System.IO;
 using System;
+using System.Threading;
 using GameOfLife;
 
 namespace ConsoleApp
@@ -9,18 +10,11 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
             Console.CancelKeyPress += HandleCancelKeyPress;
-            
+
             var consolePresenter = new ConsolePresenter();
-            var worldGenerator = new WorldGenerator(new InputReader(), new InputValidator());
-            var initialStateFilePath = GetFilePath(args);
+            var controller = new GameController(consolePresenter);
+            controller.Run(args);
             
-            var world = worldGenerator.CreateFirstGeneration(initialStateFilePath);
-            while (true)
-            {
-                consolePresenter.PrintWorld(world);
-                Thread.Sleep(1000);
-                world = worldGenerator.CreateNextGeneration(world);
-            }
         }
 
         private static void HandleCancelKeyPress(object sender, ConsoleCancelEventArgs e)
@@ -30,10 +24,6 @@ namespace ConsoleApp
             Console.ResetColor();
         }
 
-        private static string GetFilePath(string[] args)
-        {
-            if (args == null || args.Length == 0) return "InputFiles/SmallDefaultState.json";
-            return args[0];
-        }
+        
     }
 }

@@ -4,7 +4,8 @@ using GameOfLife;
 
 namespace ConsoleApp
 {
-    public class ConsolePresenter
+
+    public class ConsolePresenter : IDisplayPresenter
     {
         const string aliveCell = "🟩";
         const string deadCell = "⬜️";
@@ -23,6 +24,13 @@ namespace ConsoleApp
                 }
                 Console.WriteLine();
             }
+        }
+
+        public void PrintError(string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(message);
+            Console.ResetColor();
         }
     }
 }
