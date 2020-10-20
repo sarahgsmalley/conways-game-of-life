@@ -7,27 +7,23 @@ namespace ConsoleApp
 {
     class Program
     {
+        private static ConsolePresenter _consolePresenter;
         private static ConsoleCanceller _consoleCanceller;
 
         static void Main(string[] args)
         {
+            _consolePresenter = new ConsolePresenter();
             _consoleCanceller = new ConsoleCanceller();
             Console.CancelKeyPress += HandleCancelKeyPress;
 
-            var consolePresenter = new ConsolePresenter();
-            var controller = new GameController(consolePresenter, _consoleCanceller);
-            controller.Run(args);
-            
+            var controller = new GameController(_consolePresenter, _consoleCanceller);
+            controller.Run(args);        
         }
 
         private static void HandleCancelKeyPress(object sender, ConsoleCancelEventArgs e)
         {
             _consoleCanceller.Cancelled = true;
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Stopped");
-            Console.ResetColor();
+            _consolePresenter.PrintMessage("The Game of Life has ended.", "Green");
         }
-
-        
     }
 }

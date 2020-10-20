@@ -4,7 +4,8 @@ namespace GameOfLife
 {
     public interface IDisplayPresenter
     {
-        void PrintError(string message);
         void PrintWorld(World world);
+        void PrintMessage(string message, string colour);
+        void Clear();
     }
 }

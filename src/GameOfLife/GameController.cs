@@ -9,9 +9,9 @@ namespace GameOfLife
         private IDisplayPresenter _presenter;
         private readonly INotifyCancelling _canceller;
 
-        public GameController(IDisplayPresenter consolePresenter, INotifyCancelling canceller)
+        public GameController(IDisplayPresenter presenter, INotifyCancelling canceller)
         {
-            _presenter = consolePresenter;
+            _presenter = presenter;
             _canceller = canceller;
         }
 
@@ -27,12 +27,13 @@ namespace GameOfLife
             }
             catch (InvalidInputException e)
             {
-                _presenter.PrintError(e.Message);
+                _presenter.PrintMessage(e.Message, "Red");
                 return;
             }
 
             while (!_canceller.Cancelled)
             {
+                _presenter.Clear();
                 _presenter.PrintWorld(world);
                 Thread.Sleep(1000);
                 world = worldGenerator.CreateNextGeneration(world);
@@ -41,7 +42,7 @@ namespace GameOfLife
 
         private static string GetFilePath(string[] args)
         {
-            if (args == null || args.Length == 0) return "InputFiles/SmallDefaultState.json";
+            if (args == null || args.Length == 0) return "InputFiles/DefaultState.json";
             if (File.Exists(args[0])) return args[0];
             else throw new InvalidInputException($"Invalid File Path: {args[0]}!");
         }

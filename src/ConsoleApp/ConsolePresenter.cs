@@ -12,10 +12,6 @@ namespace ConsoleApp
 
         public void PrintWorld(World world)
         {
-            Console.Clear();
-            Console.BackgroundColor = ConsoleColor.Black;
-            Console.CursorVisible = false;
-            Console.SetCursorPosition(0, 0);
             foreach (var row in world.Cells)
             {
                 foreach (var cell in row)
@@ -26,11 +22,19 @@ namespace ConsoleApp
             }
         }
 
-        public void PrintError(string message)
+        public void PrintMessage(string message, string colour = "White")
         {
-            Console.ForegroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = (ConsoleColor)Enum.Parse(typeof(ConsoleColor), colour);
             Console.WriteLine(message);
             Console.ResetColor();
+        }
+
+        public void Clear()
+        {
+            Console.Clear();
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.CursorVisible = false;
+            Console.SetCursorPosition(0, 0);
         }
     }
 }
