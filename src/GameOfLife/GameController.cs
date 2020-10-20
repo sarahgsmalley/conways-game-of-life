@@ -6,11 +6,13 @@ namespace GameOfLife
 {
     public class GameController
     {
-        private IDisplayPresenter presenter;
+        private IDisplayPresenter _presenter;
+        private readonly INotifyCancelling _canceller;
 
-        public GameController(IDisplayPresenter consolePresenter)
+        public GameController(IDisplayPresenter consolePresenter, INotifyCancelling canceller)
         {
-            presenter = consolePresenter;
+            _presenter = consolePresenter;
+            _canceller = canceller;
         }
 
         public void Run(string[] args)
@@ -25,12 +27,13 @@ namespace GameOfLife
             }
             catch (InvalidInputException e)
             {
-                presenter.PrintError(e.Message);
+                _presenter.PrintError(e.Message);
                 return;
             }
-            while (true)
+
+            while (!_canceller.Cancelled)
             {
-                presenter.PrintWorld(world);
+                _presenter.PrintWorld(world);
                 Thread.Sleep(1000);
                 world = worldGenerator.CreateNextGeneration(world);
             }
