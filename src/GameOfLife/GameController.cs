@@ -31,12 +31,13 @@ namespace GameOfLife
                 return;
             }
 
+            _presenter.Clear();
             while (!_canceller.Cancelled)
             {
-                _presenter.Clear();
                 _presenter.PrintWorld(world);
                 Thread.Sleep(1000);
                 world = worldGenerator.CreateNextGeneration(world);
+                _presenter.Clear();
             }
         }
 

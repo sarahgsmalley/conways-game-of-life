@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using GameOfLife;
 using Xunit;
 
@@ -27,6 +28,46 @@ namespace GameOfLifeTests
             // Act & Assert
             var exception = Assert.Throws<InvalidInputException>(() => target.Validate(input));
             Assert.Equal("Error: ColumnCount does not match the number of Columns in InitialCellStates.", exception.Message);
+        }
+
+        [Theory]
+        [InlineData(-5)]
+        [InlineData(0)]
+        [InlineData(2)]
+        public void Should_Throw_When_Number_Of_Rows_Is_Below_Minimum(int rowCount)
+        {
+            // Arrange
+            var input = new Input { RowCount = rowCount, ColumnCount = 3, InitialCellStates = new List<List<CellState>>() };
+            var target = new InputValidator();
+
+            // Act & Assert
+            var exception = Assert.Throws<InvalidInputException>(() => target.Validate(input));
+            Assert.Equal("Error: The minimum number of rows allowed is 3.", exception.Message);
+        }
+
+        [Theory]
+        [InlineData(-10)]
+        [InlineData(0)]
+        [InlineData(1)]
+        public void Should_Throw_When_Number_Of_Columns_Is_Below_Minimum(int colCount)
+        {
+            // Arrange
+            var input = new Input
+            {
+                RowCount = 3,
+                ColumnCount = colCount,
+                InitialCellStates = new List<List<CellState>>
+                                    {
+                                        new List<CellState>(),
+                                        new List<CellState>(),
+                                        new List<CellState>()
+                                    }
+            };
+            var target = new InputValidator();
+
+            // Act & Assert
+            var exception = Assert.Throws<InvalidInputException>(() => target.Validate(input));
+            Assert.Equal("Error: The minimum number of columns allowed is 3.", exception.Message);
         }
     }
 }
