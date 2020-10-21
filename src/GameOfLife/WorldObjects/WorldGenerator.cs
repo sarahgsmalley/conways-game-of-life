@@ -25,10 +25,11 @@ namespace GameOfLife
         {
             var neighbourCounter = new NeighbourCounter(previousWorld.Cells);
             var newCells = new List<List<Cell>>();
-            for (int rowIndex = 0; rowIndex < previousWorld.Dimension.RowCount; rowIndex++)
+            var dimension = previousWorld.Dimension;
+            for (int rowIndex = 0; rowIndex < dimension.RowCount; rowIndex++)
             {
                 newCells.Add(new List<Cell>());
-                for (int colIndex = 0; colIndex < previousWorld.Dimension.ColumnCount; colIndex++)
+                for (int colIndex = 0; colIndex < dimension.ColumnCount; colIndex++)
                 {
                     var liveNeighbours = neighbourCounter.GetLiveNeighbourCount(rowIndex, colIndex);
                     var currentCell = previousWorld.Cells[rowIndex][colIndex];
@@ -36,7 +37,7 @@ namespace GameOfLife
                     newCells[rowIndex].Add(new Cell(isAlive ? CellState.Alive : CellState.Dead));
                 }
             }
-            return new World(previousWorld.Dimension, newCells);
+            return new World(dimension, newCells);
         }
 
     }
