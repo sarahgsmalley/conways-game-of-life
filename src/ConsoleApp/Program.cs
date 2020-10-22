@@ -17,7 +17,20 @@ namespace ConsoleApp
             Console.CancelKeyPress += HandleCancelKeyPress;
 
             var controller = new GameController(_consolePresenter, _consoleCanceller);
-            controller.Run(args);        
+            try
+            {
+                var world = controller.InitialiseFirstWorld(args);
+                controller.Run(world);
+            }
+            catch (InvalidInputException e)
+            {
+                _consolePresenter.PrintMessage(e.Message, "Red");
+                return;
+            }
+            catch (Exception e)
+            {
+                _consolePresenter.PrintMessage("Unknown error occurred.", "Red");
+            }
         }
 
         private static void HandleCancelKeyPress(object sender, ConsoleCancelEventArgs e)

@@ -39,6 +39,5 @@ namespace GameOfLife
             }
             return new World(dimension, newCells);
         }
-
     }
 }

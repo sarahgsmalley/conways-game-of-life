@@ -18,7 +18,8 @@ namespace GameOfLifeTests
             var controller = new GameController(presenter.Object, canceller.Object);
 
             // Act
-            controller.Run(new[] {"TestFiles/ValidInitialState.json"});
+            var world = controller.InitialiseFirstWorld(new[] {"TestFiles/ValidInitialState.json"});
+            controller.Run(world);
 
             // Assert
             presenter.Verify(o => o.PrintWorld(It.IsAny<World>()), Times.AtLeastOnce());
