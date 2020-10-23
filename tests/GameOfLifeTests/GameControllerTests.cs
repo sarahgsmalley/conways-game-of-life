@@ -15,7 +15,8 @@ namespace GameOfLifeTests
             presenter.Setup(o => o.PrintWorld(It.IsAny<World>()));
             var canceller = new Mock<INotifyCancelling>();
             canceller.SetupSequence(o => o.Cancelled).Returns(false).Returns(true);
-            var controller = new GameController(presenter.Object, canceller.Object);
+            var worldGenerator = new WorldGenerator(new InputReader(), new InputValidator());
+            var controller = new GameController(presenter.Object, canceller.Object, worldGenerator);
 
             // Act
             var world = controller.InitialiseFirstWorld(new[] {"TestFiles/ValidInitialState.json"});

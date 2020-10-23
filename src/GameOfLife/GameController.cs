@@ -8,32 +8,32 @@ namespace GameOfLife
     {
         private IDisplayPresenter _presenter;
         private readonly INotifyCancelling _canceller;
+        private IWorldGenerator _worldGenerator;
 
-        public GameController(IDisplayPresenter presenter, INotifyCancelling canceller)
+        public GameController(IDisplayPresenter presenter, INotifyCancelling canceller, IWorldGenerator worldGenerator)
         {
             _presenter = presenter;
             _canceller = canceller;
+            _worldGenerator = worldGenerator;
         }
 
         public void Run(World world)
         {
-            var worldGenerator = new WorldGenerator(new InputReader(), new InputValidator());
             _presenter.Clear();
             while (!_canceller.Cancelled)
             {
                 _presenter.PrintWorld(world);
                 Thread.Sleep(1000);
-                world = worldGenerator.CreateNextGeneration(world);
+                world = _worldGenerator.CreateNextGeneration(world);
                 _presenter.Clear();
             }
         }
 
         public World InitialiseFirstWorld(string[] args)
         {
-            var worldGenerator = new WorldGenerator(new InputReader(), new InputValidator());
             var world = new World();
             var initialStateFilePath = GetFilePath(args);
-            return world = worldGenerator.CreateFirstGeneration(initialStateFilePath);
+            return world = _worldGenerator.CreateFirstGeneration(initialStateFilePath);
         }
 
         private static string GetFilePath(string[] args)

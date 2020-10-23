@@ -16,7 +16,8 @@ namespace ConsoleApp
             _consoleCanceller = new ConsoleCanceller();
             Console.CancelKeyPress += HandleCancelKeyPress;
 
-            var controller = new GameController(_consolePresenter, _consoleCanceller);
+            var worldGenerator = new WorldGenerator(new InputReader(), new InputValidator());
+            var controller = new GameController(_consolePresenter, _consoleCanceller, worldGenerator);
             try
             {
                 var world = controller.InitialiseFirstWorld(args);

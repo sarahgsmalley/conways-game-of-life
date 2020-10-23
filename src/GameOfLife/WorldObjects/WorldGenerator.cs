@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace GameOfLife
 {
-    public class WorldGenerator
+    public class WorldGenerator : IWorldGenerator
     {
         private IInputReader _inputReader;
         private IInputValidator _inputValidator;
