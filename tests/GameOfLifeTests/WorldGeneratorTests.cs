@@ -19,7 +19,8 @@ namespace GameOfLifeTests
             var result = target.CreateFirstGeneration("TestFiles/ValidInitialState.json");
 
             // Assert
-            var expectedWorld = new World(3, 3, new List<List<Cell>>
+            var dimension = new Dimension(3, 3);
+            var expectedWorld = new World(dimension, new List<List<Cell>>
             {
                 new List<Cell> {new Cell(CellState.Dead), new Cell(CellState.Alive), new Cell(CellState.Dead)},
                 new List<Cell> {new Cell(CellState.Alive), new Cell(CellState.Dead), new Cell(CellState.Dead)},
@@ -69,13 +70,15 @@ namespace GameOfLifeTests
                 new List<Cell> {new Cell(CellState.Alive), new Cell(CellState.Alive), new Cell(CellState.Alive)},
                 new List<Cell> {new Cell(CellState.Dead), new Cell(CellState.Dead), new Cell(CellState.Dead)}
             };
-            var previousWorld = new World(3, 3, cells);
+            var dimension = new Dimension(3, 3);
+            var previousWorld = new World(dimension, cells);
 
             // Act
             var result = target.CreateNextGeneration(previousWorld);
 
             // Assert
-            var expectedWorld = new World(3, 3, new List<List<Cell>>
+            var expectedDimension = new Dimension(3, 3);
+            var expectedWorld = new World(expectedDimension, new List<List<Cell>>
             {
                 new List<Cell> {new Cell(CellState.Alive), new Cell(CellState.Alive), new Cell(CellState.Alive)},
                 new List<Cell> {new Cell(CellState.Alive), new Cell(CellState.Alive), new Cell(CellState.Alive)},

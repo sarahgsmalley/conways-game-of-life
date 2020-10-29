@@ -23,7 +23,8 @@ namespace GameOfLifeTests
                 new List<Cell> {new Cell(CellState.Alive), new Cell(CellState.Alive), new Cell(CellState.Alive)},
                 new List<Cell> {new Cell(CellState.Dead), new Cell(CellState.Dead), new Cell(CellState.Dead)}
             };
-            var expectedWorld = new World(3, 3, expectedCells);
+            var dimension = new Dimension(3, 3);
+            var expectedWorld = new World(dimension, expectedCells);
 
             Assert.Equal(expectedWorld, world);
         }

@@ -18,15 +18,9 @@ namespace GameOfLife
             Cells = GenerateCellsFromCellState(input.InitialCellStates);
         }
 
-        public World(int rowCount, int columnCount, List<List<Cell>> cells)
+        public World(Dimension dimension, List<List<Cell>> cells)
         {
-            Dimension = new Dimension(rowCount, columnCount);
-            Cells = cells;
-        }
-
-        public World(Dimension existingDimension, List<List<Cell>> cells)
-        {
-            Dimension = existingDimension;
+            Dimension = dimension;
             Cells = cells;
         }
 
