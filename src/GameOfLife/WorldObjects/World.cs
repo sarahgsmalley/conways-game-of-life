@@ -14,7 +14,7 @@ namespace GameOfLife
 
         public World(Input input)
         {
-            Dimension = new Dimension(input.RowCount, input.ColumnCount);
+            Dimension = input.Dimension;
             Cells = GenerateCellsFromCellState(input.InitialCellStates);
         }
 

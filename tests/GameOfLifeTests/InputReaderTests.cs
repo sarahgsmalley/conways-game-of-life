@@ -16,8 +16,8 @@ namespace GameOfLifeTests
             var result = target.Parse("TestFiles/WordCellInput.json");
 
             // Assert
-            Assert.Equal(3, result.RowCount);
-            Assert.Equal(3, result.ColumnCount);
+            Assert.Equal(3, result.Dimension.RowCount);
+            Assert.Equal(3, result.Dimension.ColumnCount);
         }
 
         [Theory]
