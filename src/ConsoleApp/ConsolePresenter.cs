@@ -20,10 +20,12 @@ namespace ConsoleApp
                 }
                 Console.WriteLine();
             }
+            Console.WriteLine();
         }
 
         public void PrintMessage(string message, string colour = "White")
         {
+            Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = (ConsoleColor)Enum.Parse(typeof(ConsoleColor), colour);
             Console.WriteLine(message);
             Console.ResetColor();
@@ -31,9 +33,9 @@ namespace ConsoleApp
 
         public void Clear()
         {
-            Console.Clear();
             Console.BackgroundColor = ConsoleColor.Black;
             Console.CursorVisible = false;
+            Console.Clear();
             Console.SetCursorPosition(0, 0);
         }
     }

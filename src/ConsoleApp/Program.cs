@@ -37,7 +37,8 @@ namespace ConsoleApp
         private static void HandleCancelKeyPress(object sender, ConsoleCancelEventArgs e)
         {
             _consoleCanceller.Cancelled = true;
-            _consolePresenter.PrintMessage("The Game of Life has ended.", "Green");
+            _consolePresenter.PrintMessage($"{Environment.NewLine}The Game of Life has been stopped.", "Green");
+            Console.CursorVisible = true;
         }
     }
 }

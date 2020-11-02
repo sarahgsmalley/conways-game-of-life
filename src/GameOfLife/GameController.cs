@@ -19,21 +19,23 @@ namespace GameOfLife
 
         public void Run(World world)
         {
+            var generationCount = 0;
             _presenter.Clear();
             while (!_canceller.Cancelled)
             {
                 _presenter.PrintWorld(world);
+                _presenter.PrintMessage($"Generation Count: {generationCount}");
                 Thread.Sleep(1000);
                 world = _worldGenerator.CreateNextGeneration(world);
+                generationCount++;
                 _presenter.Clear();
             }
         }
 
         public World InitialiseFirstWorld(string[] args)
         {
-            var world = new World();
             var initialStateFilePath = GetFilePath(args);
-            return world = _worldGenerator.CreateFirstGeneration(initialStateFilePath);
+            return _worldGenerator.CreateFirstGeneration(initialStateFilePath);
         }
 
         private static string GetFilePath(string[] args)
