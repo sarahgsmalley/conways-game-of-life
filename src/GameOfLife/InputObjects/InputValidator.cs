@@ -25,9 +25,7 @@ namespace GameOfLife
             foreach (var row in input.InitialCellStates)
             {
                 if (row.Count != colCount)
-                {
                     throw new InvalidInputException("Error: ColumnCount does not match the number of Columns in InitialCellStates.");
-                }
             }
         }
     }

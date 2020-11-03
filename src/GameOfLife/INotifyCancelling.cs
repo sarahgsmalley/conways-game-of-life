@@ -2,6 +2,9 @@ namespace GameOfLife
 {
     public interface INotifyCancelling
     {
-        bool Cancelled { get; }
+        bool ShouldStop();
+        bool ShouldSaveWorldState();
+        bool ShouldSave();
+        void CheckUserOption();
     }
 }

@@ -13,8 +13,10 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
             _consolePresenter = new ConsolePresenter();
-            _consoleCanceller = new ConsoleCanceller();
+            _consoleCanceller = new ConsoleCanceller(_consolePresenter);
             Console.CancelKeyPress += HandleCancelKeyPress;
+            // ConsoleKeyInfo cki;
+            // cki = Console.ReadKey(true);
 
             var worldGenerator = new WorldGenerator(new InputReader(), new InputValidator());
             var controller = new GameController(_consolePresenter, _consoleCanceller, worldGenerator);
@@ -26,9 +28,8 @@ namespace ConsoleApp
             catch (InvalidInputException e)
             {
                 _consolePresenter.PrintMessage(e.Message, "Red");
-                return;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 _consolePresenter.PrintMessage("Unknown error occurred.", "Red");
             }
@@ -36,27 +37,11 @@ namespace ConsoleApp
 
         private static void HandleCancelKeyPress(object sender, ConsoleCancelEventArgs e)
         {
-            _consoleCanceller.Cancelled = true;
+            //Console.CursorVisible = true;
             e.Cancel = true;
-            _consolePresenter.PrintMessage($"{Environment.NewLine}The Game of Life has been stopped.", "Green");
-            _consolePresenter.PrintMessage($"{Environment.NewLine}Would you like to save the current World state? (y/n)", "Blue");
-            var isSavingState = GetResponse();
-            if(isSavingState) _consolePresenter.PrintMessage("World state has been saved.");
-            Console.CursorVisible = true;
+            //_consolePresenter.PrintMessage($"{Environment.NewLine}The Game of Life has been stopped.", "Green");
         }
 
-        private static bool GetResponse()
-        {
-            bool result;
-            var response = Console.ReadLine().ToLower();
-            if(response.Equals("y")) result = true;
-            if(response.Equals("n")) result = false;
-            else
-            {
-                _consolePresenter.PrintMessage("Invalid response. Please enter 'y' to save or 'n' to quit without saving.");
-                result = GetResponse();
-            }
-            return result;
-        }
+        
     }
 }

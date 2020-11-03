@@ -7,5 +7,6 @@ namespace GameOfLife
         void PrintWorld(World world);
         void PrintMessage(string message, string colour = "White");
         void Clear();
+        void PrintMenu();
     }
 }

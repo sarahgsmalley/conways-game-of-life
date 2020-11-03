@@ -31,7 +31,7 @@ namespace GameOfLifeTests
             var presenter = new Mock<IDisplayPresenter>();
             presenter.Setup(o => o.PrintWorld(world));
             var canceller = new Mock<INotifyCancelling>();
-            canceller.SetupSequence(o => o.Cancelled).Returns(false).Returns(true);
+            canceller.SetupSequence(o => o.ShouldStop()).Returns(false).Returns(true);
             var worldGenerator = new Mock<IWorldGenerator>();
             worldGenerator.Setup(o => o.CreateNextGeneration(world)).Returns(world);
             var controller = new GameController(presenter.Object, canceller.Object, worldGenerator.Object);
@@ -41,7 +41,12 @@ namespace GameOfLifeTests
 
             // Assert
             presenter.Verify(o => o.PrintWorld(world), Times.AtLeastOnce());
+            presenter.Verify(o => o.PrintMenu(), Times.AtLeastOnce());
+            canceller.Verify(o => o.CheckUserOption(), Times.AtLeastOnce());
+            canceller.Verify(o => o.ShouldStop(), Times.AtLeastOnce());
+            canceller.Verify(o => o.ShouldSave(), Times.AtLeastOnce());
             worldGenerator.Verify(o => o.CreateNextGeneration(world), Times.AtLeastOnce());
+
         }
     }
 }
