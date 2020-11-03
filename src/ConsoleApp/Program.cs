@@ -37,8 +37,26 @@ namespace ConsoleApp
         private static void HandleCancelKeyPress(object sender, ConsoleCancelEventArgs e)
         {
             _consoleCanceller.Cancelled = true;
+            e.Cancel = true;
             _consolePresenter.PrintMessage($"{Environment.NewLine}The Game of Life has been stopped.", "Green");
+            _consolePresenter.PrintMessage($"{Environment.NewLine}Would you like to save the current World state? (y/n)", "Blue");
+            var isSavingState = GetResponse();
+            if(isSavingState) _consolePresenter.PrintMessage("World state has been saved.");
             Console.CursorVisible = true;
+        }
+
+        private static bool GetResponse()
+        {
+            bool result;
+            var response = Console.ReadLine().ToLower();
+            if(response.Equals("y")) result = true;
+            if(response.Equals("n")) result = false;
+            else
+            {
+                _consolePresenter.PrintMessage("Invalid response. Please enter 'y' to save or 'n' to quit without saving.");
+                result = GetResponse();
+            }
+            return result;
         }
     }
 }
