@@ -38,5 +38,13 @@ namespace ConsoleApp
             Console.Clear();
             Console.SetCursorPosition(0, 0);
         }
+
+        public void PrintMenu()
+        {
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.WriteLine();
+            Console.WriteLine("Q - Quit");
+            Console.WriteLine("S - Stop and Save");
+        }
     }
 }

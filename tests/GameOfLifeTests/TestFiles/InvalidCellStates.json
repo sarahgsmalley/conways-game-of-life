@@ -1,6 +1,8 @@
 {
-    "RowCount": 5,
-    "ColumnCount": 3,
+    "Dimension": {
+        "RowCount": 3,
+        "ColumnCount": 3
+    },
     "InitialCellStates": [
         [
             "Dead",

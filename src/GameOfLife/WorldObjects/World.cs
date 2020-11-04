@@ -7,14 +7,10 @@ namespace GameOfLife
     {
         public Dimension Dimension { get; private set; }
         public List<List<Cell>> Cells { get; private set; }
-        
-        public World()
-        {
-        }
 
         public World(Input input)
         {
-            Dimension = new Dimension(input.RowCount, input.ColumnCount);
+            Dimension = input.Dimension;
             Cells = GenerateCellsFromCellState(input.InitialCellStates);
         }
 
@@ -33,6 +29,21 @@ namespace GameOfLife
                 foreach (var cellState in row)
                 {
                     currentRow.Add(new Cell(cellState));
+                }
+                result.Add(currentRow);
+            }
+            return result;
+        }
+
+        public List<List<CellState>> ConvertCellsToCellState()
+        {
+            List<List<CellState>> result = new List<List<CellState>>();
+            foreach (var row in Cells)
+            {
+                var currentRow = new List<CellState>();
+                foreach (var cell in row)
+                {
+                    currentRow.Add(cell.CellState);
                 }
                 result.Add(currentRow);
             }

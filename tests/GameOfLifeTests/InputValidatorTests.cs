@@ -37,7 +37,7 @@ namespace GameOfLifeTests
         public void Should_Throw_When_Number_Of_Rows_Is_Below_Minimum(int rowCount)
         {
             // Arrange
-            var input = new Input { RowCount = rowCount, ColumnCount = 3, InitialCellStates = new List<List<CellState>>() };
+            var input = new Input(new Dimension(rowCount, 3), new List<List<CellState>>());
             var target = new InputValidator();
 
             // Act & Assert
@@ -52,17 +52,8 @@ namespace GameOfLifeTests
         public void Should_Throw_When_Number_Of_Columns_Is_Below_Minimum(int colCount)
         {
             // Arrange
-            var input = new Input
-            {
-                RowCount = 3,
-                ColumnCount = colCount,
-                InitialCellStates = new List<List<CellState>>
-                                    {
-                                        new List<CellState>(),
-                                        new List<CellState>(),
-                                        new List<CellState>()
-                                    }
-            };
+            var input = new Input(new Dimension(3, colCount), new List<List<CellState>> 
+                                 { new List<CellState>(), new List<CellState>(), new List<CellState>() });
             var target = new InputValidator();
 
             // Act & Assert

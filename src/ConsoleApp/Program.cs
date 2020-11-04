@@ -7,17 +7,17 @@ namespace ConsoleApp
 {
     class Program
     {
-        private static ConsolePresenter _consolePresenter;
-        private static ConsoleCanceller _consoleCanceller;
+        private static ConsolePresenter _presenter;
+        private static ConsoleQuitManager _quitManager;
 
         static void Main(string[] args)
         {
-            _consolePresenter = new ConsolePresenter();
-            _consoleCanceller = new ConsoleCanceller();
+            _presenter = new ConsolePresenter();
+            _quitManager = new ConsoleQuitManager();
             Console.CancelKeyPress += HandleCancelKeyPress;
 
             var worldGenerator = new WorldGenerator(new InputReader(), new InputValidator());
-            var controller = new GameController(_consolePresenter, _consoleCanceller, worldGenerator);
+            var controller = new GameController(_presenter, _quitManager, worldGenerator);
             try
             {
                 var world = controller.InitialiseFirstWorld(args);
@@ -25,20 +25,20 @@ namespace ConsoleApp
             }
             catch (InvalidInputException e)
             {
-                _consolePresenter.PrintMessage(e.Message, "Red");
-                return;
+                _presenter.PrintMessage(e.Message, "Red");
             }
             catch (Exception e)
             {
-                _consolePresenter.PrintMessage("Unknown error occurred.", "Red");
+                _presenter.PrintMessage($"Unknown error occurred: {e.Message}", "Red");
+
             }
         }
 
         private static void HandleCancelKeyPress(object sender, ConsoleCancelEventArgs e)
         {
-            _consoleCanceller.Cancelled = true;
-            _consolePresenter.PrintMessage($"{Environment.NewLine}The Game of Life has been stopped.", "Green");
-            Console.CursorVisible = true;
+            e.Cancel = true;
         }
+
+
     }
 }
