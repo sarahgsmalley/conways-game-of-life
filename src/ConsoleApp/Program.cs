@@ -29,7 +29,8 @@ namespace ConsoleApp
             }
             catch (Exception)
             {
-                _presenter.PrintMessage("Unknown error occurred.", "Red");
+                _presenter.PrintMessage($"Unknown error occurred: {e.Message}", "Red");
+
             }
         }
 
