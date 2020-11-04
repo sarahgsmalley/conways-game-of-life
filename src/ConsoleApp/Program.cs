@@ -35,7 +35,6 @@ namespace ConsoleApp
 
         private static void HandleCancelKeyPress(object sender, ConsoleCancelEventArgs e)
         {
-            //Console.CursorVisible = true;
             e.Cancel = true;
         }
 
