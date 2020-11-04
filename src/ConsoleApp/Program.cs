@@ -27,7 +27,7 @@ namespace ConsoleApp
             {
                 _presenter.PrintMessage(e.Message, "Red");
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 _presenter.PrintMessage($"Unknown error occurred: {e.Message}", "Red");
 
