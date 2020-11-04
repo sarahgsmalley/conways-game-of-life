@@ -7,17 +7,17 @@ namespace ConsoleApp
 {
     class Program
     {
-        private static ConsolePresenter _consolePresenter;
-        private static ConsoleQuitManager _consoleCanceller;
+        private static ConsolePresenter _presenter;
+        private static ConsoleQuitManager _quitManager;
 
         static void Main(string[] args)
         {
-            _consolePresenter = new ConsolePresenter();
-            _consoleCanceller = new ConsoleQuitManager();
+            _presenter = new ConsolePresenter();
+            _quitManager = new ConsoleQuitManager();
             Console.CancelKeyPress += HandleCancelKeyPress;
 
             var worldGenerator = new WorldGenerator(new InputReader(), new InputValidator());
-            var controller = new GameController(_consolePresenter, _consoleCanceller, worldGenerator);
+            var controller = new GameController(_presenter, _quitManager, worldGenerator);
             try
             {
                 var world = controller.InitialiseFirstWorld(args);
@@ -25,11 +25,11 @@ namespace ConsoleApp
             }
             catch (InvalidInputException e)
             {
-                _consolePresenter.PrintMessage(e.Message, "Red");
+                _presenter.PrintMessage(e.Message, "Red");
             }
             catch (Exception)
             {
-                _consolePresenter.PrintMessage("Unknown error occurred.", "Red");
+                _presenter.PrintMessage("Unknown error occurred.", "Red");
             }
         }
 
