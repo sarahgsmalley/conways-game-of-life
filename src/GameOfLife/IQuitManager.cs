@@ -1,9 +1,8 @@
 namespace GameOfLife
 {
-    public interface INotifyCancelling
+    public interface IQuitManager
     {
         bool ShouldStop();
-        bool ShouldSaveWorldState();
         bool ShouldSave();
         void CheckUserOption();
     }

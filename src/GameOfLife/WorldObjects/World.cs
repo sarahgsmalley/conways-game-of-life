@@ -39,6 +39,21 @@ namespace GameOfLife
             return result;
         }
 
+        public List<List<CellState>> ConvertCellsToCellState()
+        {
+            List<List<CellState>> result = new List<List<CellState>>();
+            foreach (var row in Cells)
+            {
+                var currentRow = new List<CellState>();
+                foreach (var cell in row)
+                {
+                    currentRow.Add(cell.CellState);
+                }
+                result.Add(currentRow);
+            }
+            return result;
+        }
+
         public bool Equals(World world)
         {
             if (world.Dimension.Equals(Dimension))

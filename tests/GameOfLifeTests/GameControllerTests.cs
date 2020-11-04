@@ -11,13 +11,13 @@ namespace GameOfLifeTests
         {
             // Arrange
             var presenter = new Mock<IDisplayPresenter>();
-            var canceller = new Mock<INotifyCancelling>();
+            var canceller = new Mock<IQuitManager>();
             var worldGenerator = new Mock<IWorldGenerator>();
             worldGenerator.Setup(o => o.CreateFirstGeneration(It.IsAny<string>())).Returns(It.IsAny<World>());
             var controller = new GameController(presenter.Object, canceller.Object, worldGenerator.Object);
 
             // Act
-            var world = controller.InitialiseFirstWorld(new[] {"TestFiles/ValidInitialState.json"});
+            var world = controller.InitialiseFirstWorld(new[] { "TestFiles/ValidInitialState.json" });
 
             // Assert
             worldGenerator.Verify(o => o.CreateFirstGeneration(It.IsAny<string>()), Times.AtMostOnce());
@@ -30,7 +30,7 @@ namespace GameOfLifeTests
             var world = It.IsAny<World>();
             var presenter = new Mock<IDisplayPresenter>();
             presenter.Setup(o => o.PrintWorld(world));
-            var canceller = new Mock<INotifyCancelling>();
+            var canceller = new Mock<IQuitManager>();
             canceller.SetupSequence(o => o.ShouldStop()).Returns(false).Returns(true);
             var worldGenerator = new Mock<IWorldGenerator>();
             worldGenerator.Setup(o => o.CreateNextGeneration(world)).Returns(world);

@@ -8,15 +8,13 @@ namespace ConsoleApp
     class Program
     {
         private static ConsolePresenter _consolePresenter;
-        private static ConsoleCanceller _consoleCanceller;
+        private static ConsoleQuitManager _consoleCanceller;
 
         static void Main(string[] args)
         {
             _consolePresenter = new ConsolePresenter();
-            _consoleCanceller = new ConsoleCanceller(_consolePresenter);
+            _consoleCanceller = new ConsoleQuitManager();
             Console.CancelKeyPress += HandleCancelKeyPress;
-            // ConsoleKeyInfo cki;
-            // cki = Console.ReadKey(true);
 
             var worldGenerator = new WorldGenerator(new InputReader(), new InputValidator());
             var controller = new GameController(_consolePresenter, _consoleCanceller, worldGenerator);
@@ -39,9 +37,8 @@ namespace ConsoleApp
         {
             //Console.CursorVisible = true;
             e.Cancel = true;
-            //_consolePresenter.PrintMessage($"{Environment.NewLine}The Game of Life has been stopped.", "Green");
         }
 
-        
+
     }
 }

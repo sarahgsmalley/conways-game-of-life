@@ -42,6 +42,7 @@ namespace ConsoleApp
         public void PrintMenu()
         {
             Console.BackgroundColor = ConsoleColor.Black;
+            Console.WriteLine();
             Console.WriteLine("Q - Quit");
             Console.WriteLine("S - Stop and Save");
         }
