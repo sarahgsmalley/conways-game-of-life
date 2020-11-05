@@ -9,13 +9,16 @@ namespace GameOfLife
     {
         private IDisplayPresenter _presenter;
         private IQuitManager _quitManager;
+        private ISaveStateManager _saveStateManager;
         private IWorldGenerator _worldGenerator;
         private string _initialStateFilePath;
 
-        public GameController(IDisplayPresenter presenter, IQuitManager quitManager, IWorldGenerator worldGenerator)
+        public GameController(IDisplayPresenter presenter, IQuitManager quitManager,
+            ISaveStateManager saveStateManager, IWorldGenerator worldGenerator)
         {
             _presenter = presenter;
             _quitManager = quitManager;
+            _saveStateManager = saveStateManager;
             _worldGenerator = worldGenerator;
         }
 
@@ -42,8 +45,7 @@ namespace GameOfLife
             _presenter.PrintMessage($"{Environment.NewLine}The Game of Life has been stopped.", "Green");
             if (_quitManager.ShouldSave())
             {
-                var outputFilePath = GetOutputFilePath();
-                SaveStateToFile(world, outputFilePath);
+                _saveStateManager.Save(_initialStateFilePath, world);
                 _presenter.PrintMessage("The current World state has now been saved in the same location as the original file.", "Blue");
             }
         }
@@ -61,22 +63,6 @@ namespace GameOfLife
             if (args == null || args.Length == 0) return "InputFiles/DefaultState.json";
             if (File.Exists(args[0])) return args[0];
             else throw new InvalidInputException($"Invalid File Path: {args[0]}!");
-        }
-
-        private void SaveStateToFile(World world, string newFilePathName)
-        {
-            var cellStates = world.ConvertCellsToCellState();
-            var input = new Input(world.Dimension, cellStates);
-            var json = JsonConvert.SerializeObject(input, Formatting.Indented);
-            File.WriteAllText(newFilePathName, json);
-        }
-
-        private string GetOutputFilePath()
-        {
-            var inputFileName = Path.GetFileNameWithoutExtension(_initialStateFilePath);
-            var directory = Path.GetDirectoryName(_initialStateFilePath);
-            var newFilePathName = Path.Combine(directory, $"{inputFileName}-output.json");
-            return newFilePathName;
         }
     }
 }

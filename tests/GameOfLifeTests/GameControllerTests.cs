@@ -1,3 +1,4 @@
+using System;
 using GameOfLife;
 using Moq;
 using Xunit;
@@ -12,9 +13,10 @@ namespace GameOfLifeTests
             // Arrange
             var presenter = new Mock<IDisplayPresenter>();
             var quitManager = new Mock<IQuitManager>();
+            var saveStateManager = new Mock<ISaveStateManager>();
             var worldGenerator = new Mock<IWorldGenerator>();
             worldGenerator.Setup(o => o.CreateFirstGeneration(It.IsAny<string>())).Returns(It.IsAny<World>());
-            var controller = new GameController(presenter.Object, quitManager.Object, worldGenerator.Object);
+            var controller = new GameController(presenter.Object, quitManager.Object, saveStateManager.Object, worldGenerator.Object);
 
             // Act
             var world = controller.InitialiseFirstWorld(new[] { "TestFiles/ValidInitialState.json" });
@@ -29,12 +31,12 @@ namespace GameOfLifeTests
             // Arrange
             var world = It.IsAny<World>();
             var presenter = new Mock<IDisplayPresenter>();
-            presenter.Setup(o => o.PrintWorld(world));
             var quitManager = new Mock<IQuitManager>();
             quitManager.SetupSequence(o => o.ShouldStop()).Returns(false).Returns(true);
+            var saveStateManager = new Mock<ISaveStateManager>();
             var worldGenerator = new Mock<IWorldGenerator>();
             worldGenerator.Setup(o => o.CreateNextGeneration(world)).Returns(world);
-            var controller = new GameController(presenter.Object, quitManager.Object, worldGenerator.Object);
+            var controller = new GameController(presenter.Object, quitManager.Object, saveStateManager.Object, worldGenerator.Object);
 
             // Act
             controller.Run(world);
@@ -46,7 +48,27 @@ namespace GameOfLifeTests
             quitManager.Verify(o => o.ShouldStop(), Times.AtLeastOnce());
             quitManager.Verify(o => o.ShouldSave(), Times.AtLeastOnce());
             worldGenerator.Verify(o => o.CreateNextGeneration(world), Times.AtLeastOnce());
+        }
 
+        [Fact]
+        public void Should_Call_Save_State_When_ShouldSave_Returns_True()
+        {
+            // Arrange
+            var presenter = new Mock<IDisplayPresenter>();
+            var quitManager = new Mock<IQuitManager>();
+            quitManager.SetupSequence(o => o.ShouldStop()).Returns(true);
+            quitManager.Setup(o => o.ShouldSave()).Returns(true);
+            var saveStateManager = new Mock<ISaveStateManager>();
+            var worldGenerator = new Mock<IWorldGenerator>();
+            var controller = new GameController(presenter.Object, quitManager.Object, saveStateManager.Object, worldGenerator.Object);
+
+            // Act
+            var world = controller.InitialiseFirstWorld(new[] { "TestFiles/ValidInitialState.json" });
+            controller.Run(world);
+
+            // Assert
+            quitManager.Verify(o => o.ShouldSave(), Times.Once());
+            saveStateManager.Verify(o => o.Save("TestFiles/ValidInitialState.json", world), Times.Once());
         }
     }
 }
