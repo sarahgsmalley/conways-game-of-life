@@ -42,8 +42,8 @@ namespace GameOfLife
             _presenter.PrintMessage($"{Environment.NewLine}The Game of Life has been stopped.", "Green");
             if (_quitManager.ShouldSave())
             {
-                var outputFilePath = GetOutputFilePath();
-                SaveStateToFile(world, outputFilePath);
+                var saveStateManager = new SaveStateManager(_initialStateFilePath, world);
+                saveStateManager.Save();
                 _presenter.PrintMessage("The current World state has now been saved in the same location as the original file.", "Blue");
             }
         }
@@ -61,22 +61,6 @@ namespace GameOfLife
             if (args == null || args.Length == 0) return "InputFiles/DefaultState.json";
             if (File.Exists(args[0])) return args[0];
             else throw new InvalidInputException($"Invalid File Path: {args[0]}!");
-        }
-
-        private void SaveStateToFile(World world, string newFilePathName)
-        {
-            var cellStates = world.ConvertCellsToCellState();
-            var input = new Input(world.Dimension, cellStates);
-            var json = JsonConvert.SerializeObject(input, Formatting.Indented);
-            File.WriteAllText(newFilePathName, json);
-        }
-
-        private string GetOutputFilePath()
-        {
-            var inputFileName = Path.GetFileNameWithoutExtension(_initialStateFilePath);
-            var directory = Path.GetDirectoryName(_initialStateFilePath);
-            var newFilePathName = Path.Combine(directory, $"{inputFileName}-output.json");
-            return newFilePathName;
         }
     }
 }
