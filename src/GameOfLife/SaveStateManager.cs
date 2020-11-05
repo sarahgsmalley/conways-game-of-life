@@ -3,35 +3,26 @@ using Newtonsoft.Json;
 
 namespace GameOfLife
 {
-    public class SaveStateManager
+    public class SaveStateManager : ISaveStateManager
     {
-        private string _originalFilePath;
-        private World _world;
-
-        public SaveStateManager(string originalFilePath, World world)
+        public void Save(string originalFilePath, World world)
         {
-            _originalFilePath = originalFilePath;
-            _world = world;
+            var outputFilePath = GetOutputFilePath(originalFilePath);
+            SaveStateToFile(outputFilePath, world);
         }
 
-        public void Save()
+        private void SaveStateToFile(string outputFilePath, World world)
         {
-            var outputFilePath = GetOutputFilePath();
-            SaveStateToFile(outputFilePath);
-        }
-
-        private void SaveStateToFile(string outputFilePath)
-        {
-            var cellStates = _world.ConvertCellsToCellState();
-            var input = new Input(_world.Dimension, cellStates);
+            var cellStates = world.ConvertCellsToCellState();
+            var input = new Input(world.Dimension, cellStates);
             var json = JsonConvert.SerializeObject(input, Formatting.Indented);
             File.WriteAllText(outputFilePath, json);
         }
 
-        private string GetOutputFilePath()
+        private string GetOutputFilePath(string originalFilePath)
         {
-            var inputFileName = Path.GetFileNameWithoutExtension(_originalFilePath);
-            var directory = Path.GetDirectoryName(_originalFilePath);
+            var inputFileName = Path.GetFileNameWithoutExtension(originalFilePath);
+            var directory = Path.GetDirectoryName(originalFilePath);
             var newFilePathName = Path.Combine(directory, $"{inputFileName}-output.json");
             return newFilePathName;
         }

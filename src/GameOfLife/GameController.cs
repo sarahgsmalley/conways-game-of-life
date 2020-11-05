@@ -9,13 +9,16 @@ namespace GameOfLife
     {
         private IDisplayPresenter _presenter;
         private IQuitManager _quitManager;
+        private ISaveStateManager _saveStateManager;
         private IWorldGenerator _worldGenerator;
         private string _initialStateFilePath;
 
-        public GameController(IDisplayPresenter presenter, IQuitManager quitManager, IWorldGenerator worldGenerator)
+        public GameController(IDisplayPresenter presenter, IQuitManager quitManager,
+            ISaveStateManager saveStateManager, IWorldGenerator worldGenerator)
         {
             _presenter = presenter;
             _quitManager = quitManager;
+            _saveStateManager = saveStateManager;
             _worldGenerator = worldGenerator;
         }
 
@@ -42,8 +45,7 @@ namespace GameOfLife
             _presenter.PrintMessage($"{Environment.NewLine}The Game of Life has been stopped.", "Green");
             if (_quitManager.ShouldSave())
             {
-                var saveStateManager = new SaveStateManager(_initialStateFilePath, world);
-                saveStateManager.Save();
+                _saveStateManager.Save(_initialStateFilePath, world);
                 _presenter.PrintMessage("The current World state has now been saved in the same location as the original file.", "Blue");
             }
         }
