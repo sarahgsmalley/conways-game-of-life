@@ -1,5 +1,3 @@
-using System.Runtime.CompilerServices;
-using System;
 using Xunit;
 using GameOfLife;
 

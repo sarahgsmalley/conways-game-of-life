@@ -1,5 +1,3 @@
-using System;
-
 namespace GameOfLife
 {
     public class InputValidator : IInputValidator
@@ -13,7 +11,7 @@ namespace GameOfLife
         private void ValidateRowCount(Input input)
         {
             var rowCount = input.Dimension.RowCount;
-            if(rowCount < 3) throw new InvalidInputException("Error: The minimum number of rows allowed is 3.");
+            if (rowCount < 3) throw new InvalidInputException("Error: The minimum number of rows allowed is 3.");
             if (input.InitialCellStates.Count != rowCount)
                 throw new InvalidInputException("Error: RowCount does not match the number of Rows in InitialCellStates.");
         }
@@ -21,7 +19,7 @@ namespace GameOfLife
         private void ValidateColumnCount(Input input)
         {
             var colCount = input.Dimension.ColumnCount;
-            if(colCount < 3) throw new InvalidInputException("Error: The minimum number of columns allowed is 3.");
+            if (colCount < 3) throw new InvalidInputException("Error: The minimum number of columns allowed is 3.");
             foreach (var row in input.InitialCellStates)
             {
                 if (row.Count != colCount)

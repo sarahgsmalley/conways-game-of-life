@@ -1,4 +1,3 @@
-using System;
 using GameOfLife;
 using Moq;
 using Xunit;

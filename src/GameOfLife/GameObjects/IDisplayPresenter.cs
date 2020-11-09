@@ -1,5 +1,3 @@
-using GameOfLife;
-
 namespace GameOfLife
 {
     public interface IDisplayPresenter

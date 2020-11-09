@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using System.Threading;
-using Newtonsoft.Json;
 
 namespace GameOfLife
 {

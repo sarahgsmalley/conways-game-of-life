@@ -52,7 +52,7 @@ namespace GameOfLifeTests
         public void Should_Throw_When_Number_Of_Columns_Is_Below_Minimum(int colCount)
         {
             // Arrange
-            var input = new Input(new Dimension(3, colCount), new List<List<CellState>> 
+            var input = new Input(new Dimension(3, colCount), new List<List<CellState>>
                                  { new List<CellState>(), new List<CellState>(), new List<CellState>() });
             var target = new InputValidator();
 

@@ -11,6 +11,6 @@ namespace GameOfLife
         {
             Dimension = dimension;
             InitialCellStates = cellStates;
-        }       
+        }
     }
 }

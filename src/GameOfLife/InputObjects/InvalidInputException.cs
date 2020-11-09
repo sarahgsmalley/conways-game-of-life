@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 using System.Text;
 
 namespace GameOfLife
@@ -10,7 +9,7 @@ namespace GameOfLife
         public InvalidInputException()
         {
         }
-        
+
         public InvalidInputException(string message) : base(message)
         {
         }
@@ -23,7 +22,8 @@ namespace GameOfLife
         {
             var result = new StringBuilder();
             result.Append("Error: Your input file is invalid for the following reason(s):");
-            foreach(string error in errors) {
+            foreach (string error in errors)
+            {
                 result.Append(error);
                 result.AppendLine();
             }

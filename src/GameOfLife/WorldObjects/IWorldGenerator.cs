@@ -4,6 +4,6 @@ namespace GameOfLife
     {
         World CreateFirstGeneration(string initialStateFilePath);
         World CreateNextGeneration(World previousWorld);
-        
+
     }
 }

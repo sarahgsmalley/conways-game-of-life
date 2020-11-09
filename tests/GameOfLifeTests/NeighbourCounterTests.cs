@@ -10,7 +10,7 @@ namespace GameOfLifeTests
         public void Should_Get_Live_Neighbour_Count_For_Central_Location()
         {
             // Arrange
-            var cells = new List<List<Cell>> 
+            var cells = new List<List<Cell>>
             {
                 new List<Cell> {new Cell(CellState.Dead), new Cell(CellState.Dead), new Cell(CellState.Dead)},
                 new List<Cell> {new Cell(CellState.Alive), new Cell(CellState.Alive), new Cell(CellState.Alive)},
@@ -31,7 +31,7 @@ namespace GameOfLifeTests
         public void Should_Return_Live_Neighbour_Count_For_Boundary_Location(int rowIndex, int colIndex, int expectedLiveCount)
         {
             // Arrange
-            var cells = new List<List<Cell>> 
+            var cells = new List<List<Cell>>
             {
                 new List<Cell> {new Cell(CellState.Alive), new Cell(CellState.Alive), new Cell(CellState.Dead)},
                 new List<Cell> {new Cell(CellState.Alive), new Cell(CellState.Dead), new Cell(CellState.Alive)},

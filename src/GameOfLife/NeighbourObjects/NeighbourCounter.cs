@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -50,7 +49,7 @@ namespace GameOfLife
             }
             return neighbourRowIndex;
         }
-        
+
         private int GetNeighbourColIndex(int cellColIndex, int columnIndexOffset)
         {
             var neighbourColIndex = cellColIndex + columnIndexOffset;

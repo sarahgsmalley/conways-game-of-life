@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using GameOfLife;
 using Xunit;
 
@@ -17,7 +16,7 @@ namespace GameOfLifeTests
             var world = new World(worldInput);
 
             // Assert
-            var expectedCells = new List<List<Cell>> 
+            var expectedCells = new List<List<Cell>>
             {
                 new List<Cell> {new Cell(CellState.Dead), new Cell(CellState.Dead), new Cell(CellState.Dead)},
                 new List<Cell> {new Cell(CellState.Alive), new Cell(CellState.Alive), new Cell(CellState.Alive)},
