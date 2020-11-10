@@ -37,7 +37,7 @@ namespace GameOfLife
                 world = _worldGenerator.CreateNextGeneration(world);
                 generationCount++;
                 PrintGeneration(world, generationCount);
-                Thread.Sleep(1000);
+                Thread.Sleep(500);
                 _quitManager.CheckUserOption();
                 isStopping = _quitManager.ShouldStop();
             }
