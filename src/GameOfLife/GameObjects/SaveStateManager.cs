@@ -1,8 +1,10 @@
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using Newtonsoft.Json;
 
 namespace GameOfLife
 {
+    [ExcludeFromCodeCoverage]
     public class SaveStateManager : ISaveStateManager
     {
         public void Save(string originalFilePath, World world)

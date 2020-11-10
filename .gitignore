@@ -19,4 +19,7 @@ obj/
 # Ignore all local history of files
 .history
 
+coveragereport/
+TestResults/
+
 *.DS_Store

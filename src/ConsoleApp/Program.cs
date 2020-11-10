@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Reflection.Metadata;
+using System.IO;
 using System;
 using System.Threading;
 using GameOfLife;
@@ -30,6 +31,7 @@ namespace ConsoleApp
             {
                 presenter.PrintMessage($"Unknown error occurred: {e.Message}", "Red");
             }
+            Console.CursorVisible = true;
         }
 
         private static void HandleCancelKeyPress(object sender, ConsoleCancelEventArgs e)
